@@ -7,29 +7,22 @@ document.addEventListener("DOMContentLoaded", function(){
   })
   .then(function(resultado){
     var contenedor = document.getElementById('peliculas');
-    for ( i = 0 ; i <= resultado.data.length ; i++ ){
-      var pelicula = resultado.data[i];
-      var div = document.createElement("div");
-      var img = document.createElement("img");
-      var title = document.createElement("h2");
-      var year = document.createElement("span");
-      var link = document.createElement("a");
 
-      img.src = pelicula.img;
-      title.innerText = pelicula.title;
-      year.innerText = pelicula.year;
-      link.innerText = "Ver película";
-      link.href = "/dos.html?id=" + pelicula.id;
+    resultado.data.forEach(element =>{
+      var template = `
+        <img src="${element.img}" class="movie-img">
+        <h2 class="title">${element.title}</h2>
+        <a href="dos.html?id=${element.id}" class="btn btn-primary">Ver pelicula</a>`;
 
-      div.appendChild(title);
-      div.appendChild(img);
-      div.appendChild(year);
-      div.appendChild(link);
-      contenedor.appendChild(div);
-
-      title.classList.add('');
-    }
+      var caja = document.createElement("div");
+      caja.classList.add("col-xs-12");
+      caja.classList.add("col-sm-6");
+      caja.classList.add("col-md-4");
+      caja.classList.add("col-lg-3");
+      caja.innerHTML = template;
+      contenedor.appendChild(caja);
+    });
 
 
-  })
-})
+  });
+});
